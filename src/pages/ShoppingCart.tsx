@@ -9,7 +9,6 @@ export const ShoppingCart = ({ selectedProducts }: any) => {
 
   useEffect(() => {
     const variable = products.map((product: any) => product.quantity * +product.price)
-    // console.log("вариабле", variable)
     const sum = variable.reduce((prev, curr) => prev + curr, 0)
     setTotal(sum)
   }, [products])
@@ -20,7 +19,6 @@ export const ShoppingCart = ({ selectedProducts }: any) => {
 
 
   const onChangeQuantity = (clicked: any) => {
-    const need = products.find((item: any) => item.id === clicked.id)
     setProducts(
       selectedProducts.map((item: any) =>
         item.id === clicked.id ? { ...clicked, quantity: clicked.quantity + 1 } : item
@@ -42,12 +40,12 @@ export const ShoppingCart = ({ selectedProducts }: any) => {
               products.length ? products
                 .map((item: any) => (
                   <li key={item.id} className="list__item">
-                    <img src={item.imgUrl} alt='image' />
+                    <img className='list__image' src={item.imgUrl} alt='image' />
                     <div className="list__details">
-                      <p>{item.name}</p>
-                      <p>price: {item.price} </p>
-                      <p>quantity: {item.quantity}</p>
-                      <button onClick={() => onChangeQuantity(item)}>plus/minus</button>
+                      <p className='list__name'>{item.name}</p>
+                      <p className='list__price'>price: {item.price} </p>
+                      <p className='list__quantity'>quantity: {item.quantity}</p>
+                      <button className='list__button' onClick={() => onChangeQuantity(item)}>plus/minus</button>
                     </div>
                   </li>
                 ))

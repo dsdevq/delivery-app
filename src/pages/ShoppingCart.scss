@@ -1,22 +1,44 @@
 .shopping-cart {
   display: flex;
   gap: 1rem;
+  min-height: 20rem;
+  height: 50vh;
   &__form {
     border: 1px solid black;
     flex: 0 1 50%;
   }
   &__list {
     flex: 0 1 50%;
-    border: 1px solid black;
+    overflow: auto;
 
+    border: 1px solid black;
   }
 }
 .list {
   &__menu {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
     padding: 1rem;
     border: 1px solid black;
   }
-  &__item {}
-  &__details {
+  &__item {
+    display: flex;
+    padding: .5rem;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: stretch;
+    }
+  &__image {
+    width: 100%;
+    max-width: 200px;
   }
+  &__details {
+    flex: 1;
+  }
+  &__name {}
+  &__price {}
+  &__quantity {}
+  &__button {}
 }
+
