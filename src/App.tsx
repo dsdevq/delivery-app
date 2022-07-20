@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import storeData from './data/items.json'
 import './styles/reset.scss'
@@ -11,15 +11,21 @@ import { Navbar } from './components/Navbar';
 
 function App() {
 
-  const [selectShop, setSelectShop] = useState()
+  const [selectShop, setSelectShop] = useState<number>()
+  const [selectedProducts, setSelectedProducts] = useState<[]>([])
+
+  useEffect(() => {
+    console.log(selectedProducts)
+    // console.log('SHOP', selectShop)
+  }, [selectedProducts, selectShop])
 
   return (
     <div className="App">
       <div className="app__container">
         <Navbar />
         <Routes>
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/shopping-cart' element={<ShoppingCart />} />
+          <Route path='/shop' element={<Shop selectedProducts={selectedProducts} setSelectedShop={setSelectShop} setSelectedProducts={setSelectedProducts} />} />
+          <Route path='/shopping-cart' element={<ShoppingCart selectedProducts={selectedProducts} />} />
         </Routes>
 
       </div>

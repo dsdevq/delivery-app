@@ -7,27 +7,27 @@
         "id": 1,
         "name": "Burger-S",
         "imgUrl": "https://media.istockphoto.com/photos/delicious-burger-isolated-on-yellow-picture-id1264358069",
-        "price": "50UAH"
+        "price": "50"
       },
       {
         "id": 2,
         "name": "Burger-M",
         "imgUrl": "https://media.istockphoto.com/photos/delicious-burger-isolated-on-yellow-picture-id1264358069",
 
-        "price": "70UAH"
+        "price": "70"
       },
       {
         "id": 3,
         "name": "Burger-L",
         "imgUrl": "https://media.istockphoto.com/photos/delicious-burger-isolated-on-yellow-picture-id1264358069",
 
-        "price": "90UAH"
+        "price": "90"
       },
       {
         "id": 4,
         "name": "Burger-XL",
         "imgUrl": "https://media.istockphoto.com/photos/delicious-burger-isolated-on-yellow-picture-id1264358069",
-        "price": "110UAH"
+        "price": "110"
       }
     ]
   },
@@ -39,25 +39,25 @@
         "id": 1,
         "name": "Chicken-S",
         "imgUrl": "https://media.istockphoto.com/photos/-picture-id458095847",
-        "price": "50UAH"
+        "price": "50"
       },
       {
         "id": 2,
         "name": "Chicken-M",
         "imgUrl": "https://media.istockphoto.com/photos/-picture-id458095847",
-        "price": "70UAH"
+        "price": "70"
       },
       {
         "id": 3,
         "name": "Chicken-L",
         "imgUrl": "https://media.istockphoto.com/photos/-picture-id458095847",
-        "price": "90UAH"
+        "price": "90"
       },
       {
         "id": 4,
         "name": "Chicken-XL",
         "imgUrl": "https://media.istockphoto.com/photos/-picture-id458095847",
-        "price": "110UAH"
+        "price": "110"
       }
     ]
   },
@@ -69,25 +69,25 @@
         "id": 1,
         "name": "Sushi-S",
         "imgUrl": "https://media.istockphoto.com/photos/sushi-fuyu-picture-id185013290",
-        "price": "50UAH"
+        "price": "50"
       },
       {
         "id": 2,
         "name": "Sushi-M",
         "imgUrl": "https://media.istockphoto.com/photos/sushi-fuyu-picture-id185013290",
-        "price": "70UAH"
+        "price": "70"
       },
       {
         "id": 3,
         "name": "Sushi-L",
         "imgUrl": "https://media.istockphoto.com/photos/sushi-fuyu-picture-id185013290",
-        "price": "90UAH"
+        "price": "90"
       },
       {
         "id": 4,
         "name": "Sushi-XL",
         "imgUrl": "https://media.istockphoto.com/photos/sushi-fuyu-picture-id185013290",
-        "price": "110UAH"
+        "price": "110"
       }
     ]
   }

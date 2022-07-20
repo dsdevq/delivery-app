@@ -9,14 +9,24 @@ interface MenuProps {
   price: string
 }
 
-export const Shop = () => {
+export const Shop = ({ selectedProducts, setSelectedShop, setSelectedProducts }: any) => {
 
   const [shop, setShop] = useState(0)
   const [menu, setMenu] = useState<MenuProps[] | undefined>([])
 
+  const onAdd = (menuItem: any) => {
+    const product = selectedProducts.find((item: any) => item.id === menuItem.id)
+    setMenu(prevState => prevState?.filter((item: any) => item.id !== menuItem.id))
+    setSelectedProducts([...selectedProducts, { ...menuItem, quantity: 1 }])
+  }
+
   useEffect(() => {
+    setSelectedProducts([])
+
+    // Products that exist
     const founded = data.find((menu) => menu.id === shop)
-    setMenu(founded?.menu)
+    const available = founded?.menu.filter((item) => item.id !== selectedProducts.find((product: any) => product.id === item.id))
+    setMenu(available)
 
   }, [shop])
 
@@ -28,7 +38,10 @@ export const Shop = () => {
         <ul className="shops-items__list">
           {
             data ? data.map((shop) => (
-              <li key={shop.id} className="shops-items__shop" onClick={() => setShop(shop.id)}>
+              <li key={shop.id} className="shops-items__shop" onClick={
+                () => setShop(shop.id)
+                // () => setSelectedShop(shop)
+              }>
                 {shop.name}
               </li>
             ))
@@ -41,14 +54,14 @@ export const Shop = () => {
       <section className="shop__items shop-menu">
         <ul className="shop-menu__list">
           {
-            menu ? menu.map((item: MenuProps) => (
+            menu?.length ? menu.map((item: MenuProps) => (
               <li key={item.id} className="shop-menu__item">
                 <img className='shop-menu__image' src={item.imgUrl} alt="foodImage" />
                 <div className='shop-menu__information'>
                   <p className='shop-menu__name'>
                     {item.name}
                   </p>
-                  <button className='shop-menu__button'>add to Cart</button>
+                  <button className='shop-menu__button' onClick={() => onAdd(item)}>add to Cart</button>
                 </div>
               </li>
             ))
