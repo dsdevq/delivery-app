@@ -7,7 +7,7 @@ export const Form = () => {
     e.preventDefault()
     const data = [(e.target)].map((target: any) => target)
     console.log(data)
-    console.log(e.target.length)
+    console.log(e.target)
   }
 
   return (

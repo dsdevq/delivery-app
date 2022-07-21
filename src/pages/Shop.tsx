@@ -1,30 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import './Shop.scss'
 import data from '../data/items.json'
+import { Products } from '../App'
 
-interface MenuProps {
+export interface ShopProps {
   id: number,
   name: string,
+  menu: MenuProps[],
+}
+
+export interface MenuProps {
+  id: number,
+  name: string,
+  quantity?: number,
   imgUrl: string,
   price: string
 }
 
-export const Shop = ({ selectedProducts, setSelectedShop, setSelectedProducts }: any) => {
 
-  const [shop, setShop] = useState<any>()
+
+export const Shop = ({ selectedProducts, setSelectedProducts }: Products) => {
+
+  const [shop, setShop] = useState<ShopProps>()
   const [menu, setMenu] = useState<MenuProps[] | undefined>([])
 
-  const onAdd = (menuItem: any) => {
-    setMenu(prevState => prevState?.filter((item: any) => item.id !== menuItem.id))
+  const onAdd = (menuItem: MenuProps) => {
+    setMenu(prevState => prevState?.filter((item: MenuProps) => item.id !== menuItem.id))
     setSelectedProducts([...selectedProducts, { ...menuItem, quantity: 1 }])
   }
 
   useEffect(() => {
-    console.log(shop)
     setSelectedProducts([])
     // Products that exist
     const founded = data.find((menu) => menu.id === shop?.id)
-    const available = founded?.menu.filter((item) => item.id !== selectedProducts.find((product: any) => product.id === item.id))
+    // Remove selected products
+    const available = founded?.menu.filter((item: any) => item.id !== selectedProducts.find((product: any) => product.id == item.id))
     setMenu(available)
 
   }, [shop])

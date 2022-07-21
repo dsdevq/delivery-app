@@ -1,59 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import './ShoppingCart.scss'
 import { Form } from '../components/Form'
+import { MenuProps } from './Shop'
 
-export const ShoppingCart = ({ selectedProducts }: any) => {
+export const ShoppingCart = ({ selectedProducts, setSelectedProducts }: any) => {
 
-  const [products, setProducts] = useState([])
   const [total, setTotal] = useState(0)
 
   useEffect(() => {
-    const variable = products.map((product: any) => product.quantity * +product.price)
-    const sum = variable.reduce((prev, curr) => prev + curr, 0)
+    const variable = selectedProducts.map((product: any) => product?.quantity ? product.quantity * +product.price : 0)
+    const sum = variable.reduce((prev: any, curr: any) => prev + curr, 0)
     setTotal(sum)
-  }, [products])
+  }, [selectedProducts])
 
-  useEffect(() => {
-    setProducts(selectedProducts)
-  }, [])
-
-
-  const increaseQuantity = (id: any) => {
-    setProducts(
-      selectedProducts.map((item: any) =>
-        item.id === id.id ? { ...id, quantity: id.quantity + 1 } : item
-      )
-    )
+  const increaseQuantity = (clicked: MenuProps) => {
+    setSelectedProducts((selectedProducts: any) => {
+      return selectedProducts.map((item: MenuProps) => {
+        if (item.id === clicked.id && item.quantity) {
+          return { ...item, quantity: item?.quantity + 1 }
+        }
+        else {
+          return item
+        }
+      })
+    })
   }
 
-  // setCartItems(currItems => {
-  //   // If item quantity is just 1
-  //   if (currItems.find(item => item.id === id)?.quantity === 1) {
-  //     // Then remove this item by using filter
-  //     return currItems.filter((item) => item.id !== id)
-  //   }
-  //   else {
-  //     // Or if its > 1
-  //     return currItems.map((item) => {
-  //       if (item.id === id) {
-  //         // Return old item, but decrement quantity
-  //         return { ...item, quantity: item.quantity - 1 }
-  //       }
-  //       else {
-  //         // or just return item
-  //         return item
-  //       }
-  //     })
-  //   }
-  // })
-
-  const decreaseQuantity = (clicked: any) => {
-    setProducts(
-      // if ()
-      selectedProducts.map((item: any) =>
-        item.id === clicked.id ? { ...clicked, quantity: clicked.quantity - 1 } : item
-      )
-    )
+  const decreaseQuantity = (clicked: MenuProps) => {
+    setSelectedProducts((selectedProducts: any) => {
+      if (selectedProducts.find((item: MenuProps) => item.id === clicked.id)?.quantity === 1) {
+        return selectedProducts.filter((item: MenuProps) => item.id !== clicked.id)
+      }
+      else {
+        return selectedProducts.map((item: MenuProps) => {
+          if (item.id === clicked.id && item.quantity) {
+            return { ...item, quantity: item?.quantity - 1 }
+          }
+          else {
+            return item
+          }
+        })
+      }
+    })
   }
 
 
@@ -67,8 +55,8 @@ export const ShoppingCart = ({ selectedProducts }: any) => {
         <section className="shopping-cart__list list">
           <ul className="list__menu">
             {
-              products.length ? products
-                .map((item: any) => (
+              selectedProducts.length ? selectedProducts
+                .map((item: MenuProps) => (
                   <li key={item.id} className="list__item">
                     <img className='list__image' src={item.imgUrl} alt='image' />
                     <div className="list__details">
@@ -76,7 +64,7 @@ export const ShoppingCart = ({ selectedProducts }: any) => {
                       <p className='list__price'>Price: {item.price}UAH </p>
                       <p className='list__quantity'>Quantity: {item.quantity}</p>
                       <button className='list__button' onClick={() => increaseQuantity(item)}>Increase</button>
-                      {/* <button className='list__button' onClick={() => decreaseQuantity(item)}>Decrease</button> */}
+                      <button className='list__button' onClick={() => decreaseQuantity(item)}>Decrease</button>
                     </div>
                   </li>
                 ))
