@@ -11,20 +11,19 @@ interface MenuProps {
 
 export const Shop = ({ selectedProducts, setSelectedShop, setSelectedProducts }: any) => {
 
-  const [shop, setShop] = useState(0)
+  const [shop, setShop] = useState<any>()
   const [menu, setMenu] = useState<MenuProps[] | undefined>([])
 
   const onAdd = (menuItem: any) => {
-    const product = selectedProducts.find((item: any) => item.id === menuItem.id)
     setMenu(prevState => prevState?.filter((item: any) => item.id !== menuItem.id))
     setSelectedProducts([...selectedProducts, { ...menuItem, quantity: 1 }])
   }
 
   useEffect(() => {
+    console.log(shop)
     setSelectedProducts([])
-
     // Products that exist
-    const founded = data.find((menu) => menu.id === shop)
+    const founded = data.find((menu) => menu.id === shop?.id)
     const available = founded?.menu.filter((item) => item.id !== selectedProducts.find((product: any) => product.id === item.id))
     setMenu(available)
 
@@ -34,13 +33,12 @@ export const Shop = ({ selectedProducts, setSelectedShop, setSelectedProducts }:
     <main className="shop">
       <section className="shop__shops shops-items">
         {/* Shop list */}
-        <h1>Shops:</h1>
+        <h1>Selected shop: {shop?.name}</h1>
         <ul className="shops-items__list">
           {
             data ? data.map((shop) => (
               <li key={shop.id} className="shops-items__shop" onClick={
-                () => setShop(shop.id)
-                // () => setSelectedShop(shop)
+                () => setShop(shop)
               }>
                 {shop.name}
               </li>
