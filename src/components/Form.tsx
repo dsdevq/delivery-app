@@ -5,9 +5,7 @@ export const Form = () => {
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault()
-    const data = [(e.target)].map((target: any) => target)
-    console.log(data)
-    console.log(e.target)
+    Array.from(e.target).map((x: any) => console.log(x.value, x.name))
   }
 
   return (
