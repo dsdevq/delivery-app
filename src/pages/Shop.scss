@@ -41,8 +41,8 @@
     gap: 1rem;
   }
   &__item {
-    flex: 1 1;
-    max-width: 200px;
+    flex: 1 1 200px;
+    max-width: 250px;
     border: 1px solid black;
     padding: .5rem;
   }

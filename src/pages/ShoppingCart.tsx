@@ -2,49 +2,48 @@ import React, { useEffect, useState } from 'react'
 import './ShoppingCart.scss'
 import { Form } from '../components/Form'
 import { MenuProps } from './Shop'
+import { useShoppingCart } from '../context/DeliveryAppContext'
+import { ShoppingCartItem } from '../components/ShoppingCartItem'
+import data from '../data/items.json'
 
-export const ShoppingCart = ({ selectedProducts, setSelectedProducts }: any) => {
+
+export const ShoppingCart = () => {
+
+  const {
+    shop,
+    selectedProducts
+  } = useShoppingCart()
 
   const [total, setTotal] = useState(0)
 
+  const neededShop = data.find((item) => item.id === shop)
   useEffect(() => {
-    const variable = selectedProducts.map((product: any) => product?.quantity ? product.quantity * +product.price : 0)
-    const sum = variable.reduce((prev: any, curr: any) => prev + curr, 0)
-    setTotal(sum)
-  }, [selectedProducts])
+    // ! FIX
+    const neededShop = data.find((item) => item.id === shop)
+    const variable = selectedProducts.map((product) => {
+      const item = neededShop?.menu.find((i: any) => i.id === product.id)
+      if (item?.price) {
+        return item?.price * product.quantity
+      }
+      else return 0
+    })
+    if (selectedProducts) {
+      setTotal(0)
+    }
 
-  const increaseQuantity = (clicked: MenuProps) => {
-    setSelectedProducts((selectedProducts: any) => {
-      return selectedProducts.map((item: MenuProps) => {
-        if (item.id === clicked.id && item.quantity) {
-          return { ...item, quantity: item?.quantity + 1 }
+    if (variable.length) {
+      const sum = variable.reduce((prev, curr) => {
+        if (prev && curr) {
+          return prev + curr
         }
-        else {
-          return item
-        }
+        else return 0
       })
-    })
-  }
-
-  const decreaseQuantity = (clicked: MenuProps) => {
-    setSelectedProducts((selectedProducts: any) => {
-      if (selectedProducts.find((item: MenuProps) => item.id === clicked.id)?.quantity === 1) {
-        return selectedProducts.filter((item: MenuProps) => item.id !== clicked.id)
-      }
-      else {
-        return selectedProducts.map((item: MenuProps) => {
-          if (item.id === clicked.id && item.quantity) {
-            return { ...item, quantity: item?.quantity - 1 }
-          }
-          else {
-            return item
-          }
-        })
-      }
-    })
-  }
+      setTotal(sum)
+      // !!!!!!!!!!!!!!!!!!!!!
+    }
 
 
+  }, [selectedProducts])
 
   return (
     <>
@@ -53,21 +52,14 @@ export const ShoppingCart = ({ selectedProducts, setSelectedProducts }: any) => 
           <Form />
         </section>
         <section className="shopping-cart__list list">
+          <h1>Selected shop: {neededShop?.name}</h1>
           <ul className="list__menu">
             {
               selectedProducts.length ? selectedProducts
-                .map((item: MenuProps) => (
-                  <li key={item.id} className="list__item">
-                    <img className='list__image' src={item.imgUrl} alt='image' />
-                    <div className="list__details">
-                      <p className='list__name'>{item.name}</p>
-                      <p className='list__price'>Price: {item.price}UAH </p>
-                      <p className='list__quantity'>Quantity: {item.quantity}</p>
-                      <button className='list__button' onClick={() => increaseQuantity(item)}>Increase</button>
-                      <button className='list__button' onClick={() => decreaseQuantity(item)}>Decrease</button>
-                    </div>
-                  </li>
-                ))
+                .map((item) => (
+                  <ShoppingCartItem key={item.id} {...item} />
+                )
+                )
                 :
                 <p>No products selected yet</p>
             }
