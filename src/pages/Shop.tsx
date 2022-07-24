@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './Shop.scss'
 import data from '../data/items.json'
 import { ShopItem } from '../components/ShopItem'
@@ -17,8 +17,6 @@ export interface MenuProps {
   imgUrl: string,
   price: number
 }
-
-
 
 export const Shop = () => {
 
@@ -63,7 +61,7 @@ export const Shop = () => {
             ))
               :
               (
-                <p className='error'> choose shop</p>
+                <p className='error'> Choose shop</p>
               )
           }
         </ul>

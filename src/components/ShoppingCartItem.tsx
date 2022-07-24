@@ -9,6 +9,7 @@ type ShoppingCartItemProps = {
 }
 
 export const ShoppingCartItem = ({ id, quantity }: ShoppingCartItemProps) => {
+
   const {
     increaseCartQuantity,
     decreaseCartQuantity,
@@ -19,8 +20,11 @@ export const ShoppingCartItem = ({ id, quantity }: ShoppingCartItemProps) => {
 
 
   useEffect(() => {
+    // Get selected shop by id
     const neededShop = data.find((shops) => shops.id === shop)
+    // Get selected products by id 
     const neededProduct = neededShop?.menu.find((product) => product.id === id)
+    // Set product, so it will appear
     setProduct(neededProduct)
   }, [])
 

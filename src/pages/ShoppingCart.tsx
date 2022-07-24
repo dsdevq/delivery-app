@@ -70,7 +70,9 @@ export const ShoppingCart = () => {
         <p>
           Total {total}
         </p>
-        <button form='Form' type='submit'>
+        <button
+          // disabled={!selectedProducts.length ? true : false} 
+          form='Form' type='submit'>
           Submit
         </button>
       </div>
