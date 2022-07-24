@@ -1,4 +1,3 @@
-import React from 'react'
 import { useShoppingCart } from '../context/DeliveryAppContext'
 import './Form.scss'
 
@@ -9,14 +8,32 @@ export const Form = () => {
     selectedProducts
   } = useShoppingCart()
 
+
   const handleOnSubmit = (e: any) => {
     e.preventDefault()
     // Get form data
     const data = Object.fromEntries(Array.from(e.target).map((x: any) => ([x.id, x.value])))
     // Remove null properties
     const filtered = Object.fromEntries(Object.entries(data).filter(([key]) => key !== ''));
-    // console.log(filtered)
-    // console.log(selectedProducts)
+
+
+    // Get products
+    const needeed = data.find((item: any) => item.id === shop)?.menu
+    const final = needeed?.map((product: { id: number }, index: any) => {
+      const searching = selectedProducts.find((item) => item.id === product.id)?.quantity
+      if (searching) {
+        return { ...product, quantity: searching }
+      }
+    })
+
+    for (const key in final) {
+      if (final[+key] === undefined) {
+        delete final[+key]
+      }
+    }
+
+
+    console.log(selectedProducts)
 
   }
 

@@ -38,6 +38,9 @@ export const ShoppingCartItem = ({ id, quantity }: ShoppingCartItemProps) => {
               <p className='list__name'>{product.name}</p>
               <p className='list__price'>Price: {product.price}UAH </p>
               <p className='list__quantity'>Quantity: {quantity}</p>
+              {quantity > 1 &&
+                <p>Total: {quantity * product.price}</p>
+              }
               <button className='list__button' onClick={() => increaseCartQuantity(id)}>Increase</button>
               <button className='list__button' onClick={() => decreaseCartQuantity(id)}>{quantity !== 1 ? 'Decrease' : 'Remove'}</button>
             </div>

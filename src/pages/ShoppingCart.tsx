@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './ShoppingCart.scss'
 import { Form } from '../components/Form'
-import { MenuProps } from './Shop'
 import { useShoppingCart } from '../context/DeliveryAppContext'
 import { ShoppingCartItem } from '../components/ShoppingCartItem'
 import data from '../data/items.json'
