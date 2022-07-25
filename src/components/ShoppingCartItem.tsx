@@ -13,6 +13,7 @@ export const ShoppingCartItem = ({ id, quantity }: ShoppingCartItemProps) => {
   const {
     increaseCartQuantity,
     decreaseCartQuantity,
+    removeFromCart,
     shop,
   } = useShoppingCart()
 
@@ -41,8 +42,11 @@ export const ShoppingCartItem = ({ id, quantity }: ShoppingCartItemProps) => {
               {quantity > 1 &&
                 <p>Total: {quantity * product.price}</p>
               }
-              <button className='list__button' onClick={() => increaseCartQuantity(id)}>Increase</button>
-              <button className='list__button' onClick={() => decreaseCartQuantity(id)}>{quantity !== 1 ? 'Decrease' : 'Remove'}</button>
+              <div className="list__buttons">
+                <button className='list__button' onClick={() => increaseCartQuantity(id)}>Increase</button>
+                <button className='list__button' onClick={() => decreaseCartQuantity(id)}>{quantity !== 1 ? 'Decrease' : 'Remove'}</button>
+                <button className='list__button close' onClick={() => removeFromCart(id)}> &times; </button>
+              </div>
             </div>
           </li>
         )

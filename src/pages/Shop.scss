@@ -33,32 +33,3 @@
 }
 .error {
 }
-.shop-menu {
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 1rem;
-    gap: 1rem;
-  }
-  &__item {
-    flex: 1 1 200px;
-    max-width: 250px;
-    border: 1px solid black;
-    padding: .5rem;
-  }
-  &__image {
-    max-width: 100%;
-    aspect-ratio: 1/1;
-  }
-  &__information {
-    display: flex;
-    min-height: 3rem;
-    justify-content: space-between;
-  }
-  &__name {
-    align-self: flex-start;
-  }
-  &__button {
-    align-self: flex-end;
-  }
-}

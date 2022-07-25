@@ -1,6 +1,7 @@
 .shopping-cart {
   display: flex;
   flex-wrap: wrap;
+  padding: 1rem 0 ;
   gap: 1rem;
   &__form {
     border: 1px solid black;
@@ -10,7 +11,6 @@
   &__list {
     flex: 1 1 40%;
     overflow: auto;
-    max-height: 310px;
     min-width: 200px;
     border: 1px solid black;
   }
@@ -29,21 +29,56 @@
   }
   &__item {
     display: flex;
+    gap: 1rem;
+    position: relative;
     padding: .5rem;
     border: 1px solid black;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    justify-content: stretch;
     }
   &__image {
     width: 100%;
     max-width: 200px;
   }
   &__details {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
     flex: 1;
+    font-size: 20px;
   }
   &__name {}
   &__price {}
-  &__quantity {}
-  &__button {}
+  &__quantity {
+  }
+  &__buttons {
+    display: flex;
+    gap: 5px;
+  }
+  &__button {
+    font-size: 22px;
+    align-self: flex-start;
+  }
 }
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.submit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;  
+  &__total {
+    font-size: 48px;
+  }
+  &__button {
+    padding: 10px;
+    font-size: 24px;
+  }
+}
+
 

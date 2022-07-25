@@ -64,11 +64,12 @@ export const ShoppingCart = () => {
           </ul>
         </section>
       </main>
-      <div>
-        <p>
-          Total {total}
+      <div className='submit'>
+        <p className='submit__total'>
+          Total {total}UAH
         </p>
         <button
+          className='submit__button'
           // disabled={!selectedProducts.length ? true : false} 
           form='Form' type='submit'>
           Submit

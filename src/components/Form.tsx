@@ -67,7 +67,7 @@ export const Form = ({ total }: TotalProp) => {
       </form>
       {
         order && (
-          <p> Order : {JSON.stringify(order)}</p>
+          <p className='order'> Order : {JSON.stringify(order)}</p>
         )
       }
     </>

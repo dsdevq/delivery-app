@@ -1,6 +1,5 @@
-import React from 'react'
 import { useShoppingCart } from '../context/DeliveryAppContext'
-import { MenuProps } from '../pages/Shop'
+import './ShopItem.scss'
 
 type StoreItemProps = {
   id: number,
@@ -18,6 +17,7 @@ export const ShopItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
   } = useShoppingCart()
 
   const quantity = getItemQuantity(id)
+
   return (
     <li key={id} className="shop-menu__item">
       <img className='shop-menu__image' src={imgUrl} alt="foodImage" />
@@ -25,7 +25,7 @@ export const ShopItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
         <p className='shop-menu__name'>
           {name}
         </p>
-        <p>
+        <p className='shop-menu__price'>
           {price}UAH
         </p>
         {
@@ -33,7 +33,7 @@ export const ShopItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
             ?
             <button className='shop-menu__button' onClick={() => increaseCartQuantity(id)}>+ add to Cart</button>
             :
-            <button onClick={() => removeFromCart(id)}>Remove</button>
+            <button className='shop-menu__button' onClick={() => removeFromCart(id)}>Remove</button>
         }
       </div>
     </li>
