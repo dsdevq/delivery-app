@@ -1,40 +1,40 @@
+import { useState } from 'react'
 import { useShoppingCart } from '../context/DeliveryAppContext'
+import data from '../data/items.json'
 import './Form.scss'
 
-export const Form = () => {
+type TotalProp = {
+  total: number
+}
+
+export const Form = ({ total }: TotalProp) => {
 
   const {
     shop,
     selectedProducts
   } = useShoppingCart()
 
+  const [order, setOrder] = useState({})
 
   const handleOnSubmit = (e: any) => {
     e.preventDefault()
     // Get form data
-    const data = Object.fromEntries(Array.from(e.target).map((x: any) => ([x.id, x.value])))
+    const formValues = Object.fromEntries(Array.from(e.target).map((x: any) => ([x.id, x.value])))
     // Remove null properties
-    const filtered = Object.fromEntries(Object.entries(data).filter(([key]) => key !== ''));
+    const filtered = Object.fromEntries(Object.entries(formValues).filter(([key]) => key !== ''));
 
 
     // Get products
-    const needeed = data.find((item: any) => item.id === shop)?.menu
-    const final = needeed?.map((product: { id: number }, index: any) => {
+    const needeed = data.find((item) => item.id === shop)?.menu
+    // Get product by id, get it data and filter odd items
+    const final = needeed?.map((product: { id: number }) => {
       const searching = selectedProducts.find((item) => item.id === product.id)?.quantity
       if (searching) {
         return { ...product, quantity: searching }
       }
-    })
-
-    for (const key in final) {
-      if (final[+key] === undefined) {
-        delete final[+key]
-      }
-    }
-
-
-    console.log(selectedProducts)
-
+    }).filter((item) => item !== undefined)
+    // Spread product value + form value into another obj
+    setOrder({ products: { ...[final] }, total, formData: { ...filtered } })
   }
 
   return (
@@ -65,6 +65,11 @@ export const Form = () => {
             type="text" id='address' />
         </div>
       </form>
+      {
+        order && (
+          <p> Order : {JSON.stringify(order)}</p>
+        )
+      }
     </>
   )
 }

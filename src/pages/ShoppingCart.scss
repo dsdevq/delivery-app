@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  min-height: 20rem;
   &__form {
     border: 1px solid black;
     flex: 1 1 40%;
@@ -11,18 +10,22 @@
   &__list {
     flex: 1 1 40%;
     overflow: auto;
+    max-height: 310px;
     min-width: 200px;
-
     border: 1px solid black;
   }
 }
 .list {
+  &__title {
+    position: absolute;
+    top: 30px;
+  }
   &__menu {
     display: flex;
     gap: 1rem;
     flex-direction: column;
+    overflow: auto;
     padding: 1rem;
-    border: 1px solid black;
   }
   &__item {
     display: flex;

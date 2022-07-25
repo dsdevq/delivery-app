@@ -19,17 +19,16 @@ export const ShoppingCart = () => {
   useEffect(() => {
     // ! FIX
     const neededShop = data.find((item) => item.id === shop)
+    // Getting array with total price for each product
     const variable = selectedProducts.map((product) => {
-      const item = neededShop?.menu.find((i: any) => i.id === product.id)
+      const item = neededShop?.menu.find((i) => i.id === product.id)
       if (item?.price) {
         return item?.price * product.quantity
       }
       else return 0
     })
-    if (selectedProducts) {
-      setTotal(0)
-    }
 
+    // Sum this array
     if (variable.length) {
       const sum = variable.reduce((prev, curr) => {
         if (prev && curr) {
@@ -39,7 +38,7 @@ export const ShoppingCart = () => {
       })
       setTotal(sum)
       // !!!!!!!!!!!!!!!!!!!!!
-    }
+    } else setTotal(0)
 
 
   }, [selectedProducts])
@@ -48,10 +47,10 @@ export const ShoppingCart = () => {
     <>
       <main className="shopping-cart">
         <section className="shopping-cart__form">
-          <Form />
+          <Form total={total} />
         </section>
         <section className="shopping-cart__list list">
-          <h1>Selected shop: {neededShop?.name}</h1>
+          <h1 className='list__title'>Selected shop: {neededShop?.name}</h1>
           <ul className="list__menu">
             {
               selectedProducts.length ? selectedProducts
