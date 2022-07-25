@@ -70,7 +70,7 @@ export const ShoppingCart = () => {
         </p>
         <button
           className='submit__button'
-          // disabled={!selectedProducts.length ? true : false} 
+          disabled={!selectedProducts.length ? true : false}
           form='Form' type='submit'>
           Submit
         </button>

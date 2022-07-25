@@ -43,25 +43,25 @@ export const Form = ({ total }: TotalProp) => {
         <div className='form__item'>
           <label className='label' htmlFor="name">Name:</label>
           <input className='input'
-            // required 
+            required
             type="text" id='name' />
         </div>
         <div className='form__item'>
           <label className='label' htmlFor="email">Email:</label>
           <input className='input'
-            // required 
+            required
             type="email" id='email' />
         </div>
         <div className='form__item'>
           <label className='label' htmlFor="tel">Phone:</label>
           <input className='input'
-            // required 
+            required
             type="tel" id='tel' />
         </div>
         <div className='form__item'>
           <label className='label' htmlFor="address">Address:</label>
           <input className='input'
-            // required 
+            required
             type="text" id='address' />
         </div>
       </form>
