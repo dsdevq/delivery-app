@@ -35,8 +35,12 @@ export function DeliveryAppProvider({ children }: DeliveryAppProviderProps) {
   const [shop, setShop] = useLocalStorage<number>('delivery-shop', (0))
   const [selectedProducts, setSelectedProducts] = useLocalStorage<CartItem[]>('delivery-app', [])
 
-  const chooseShop = (id: number) => setShop(id)
-
+  const chooseShop = (id: number) => {
+    if (selectedProducts.length > 0 && shop !== id) {
+      window.confirm('You can order only from 1 restaurant. Confirm change ?') && setShop(id)
+    }
+    else setShop(id)
+  }
 
   const cartQuantity = selectedProducts.reduce(
     (quantity, item) => item.quantity + quantity, 0

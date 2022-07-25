@@ -18,23 +18,19 @@ export const ShoppingCart = () => {
   const neededShop = data.find((item) => item.id === shop)
   useEffect(() => {
     // ! FIX
-    const neededShop = data.find((item) => item.id === shop)
     // Getting array with total price for each product
     const variable = selectedProducts.map((product) => {
       const item = neededShop?.menu.find((i) => i.id === product.id)
-      if (item?.price) {
+      if (item) {
         return item?.price * product.quantity
       }
       else return 0
     })
 
-    // Sum this array
+    // Sum this array if it has values
     if (variable.length) {
       const sum = variable.reduce((prev, curr) => {
-        if (prev && curr) {
-          return prev + curr
-        }
-        else return 0
+        return prev + curr
       })
       setTotal(sum)
       // !!!!!!!!!!!!!!!!!!!!!
