@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import './Shop.scss'
 import data from '../data/items.json'
 import { ShopItem } from '../components/ShopItem'
@@ -37,7 +37,7 @@ export const Shop = () => {
     <main className="shop">
       <section className="shop__shops shops-items">
         {/* Shop list */}
-        <h1>Selected shop: {item?.name}</h1>
+        <h1 className='shops-items__title'>Selected shop: {item?.name}</h1>
         <ul className="shops-items__list">
           {
             data ? data.map((shop) => (

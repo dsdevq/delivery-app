@@ -5,6 +5,7 @@ import './styles/global.scss'
 import { ShoppingCart } from './pages/ShoppingCart';
 import { Shop } from './pages/Shop';
 import { Navbar } from './components/Navbar';
+import { Orders } from './pages/Orders';
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/shop' element={<Shop />} />
           <Route path='/shopping-cart' element={<ShoppingCart />} />
+          <Route path='/orders' element={<Orders />} />
         </Routes>
       </div>
     </div >

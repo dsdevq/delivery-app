@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useContext } from 'react'
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import data from '../data/items.json'
 type DeliveryAppProviderProps = {
   children: ReactNode
 }
@@ -13,7 +14,11 @@ type DeliveryAppContext = {
   shop: number
   chooseShop: (id: number) => void
   cartQuantity: number
-  selectedProducts: CartItem[]
+  selectedProducts: CartItem[],
+  calculateTotal: () => void,
+  handleOnSubmit: (e: any) => void
+  total: number
+  orders: any
 }
 
 
@@ -32,8 +37,13 @@ export function useShoppingCart() {
 export function DeliveryAppProvider({ children }: DeliveryAppProviderProps) {
 
 
+  const [total, setTotal] = useState(0)
   const [shop, setShop] = useLocalStorage<number>('delivery-shop', (0))
   const [selectedProducts, setSelectedProducts] = useLocalStorage<CartItem[]>('delivery-app', [])
+  const [orders, setOrders] = useLocalStorage<any[]>('delivery-orders', [])
+
+
+  const findShop = data.find((item) => item.id === shop)
 
   const chooseShop = (id: number) => {
     if (selectedProducts.length > 0 && shop !== id) {
@@ -105,6 +115,62 @@ export function DeliveryAppProvider({ children }: DeliveryAppProviderProps) {
 
   const clearState = () => setSelectedProducts([])
 
+  const currentData = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0'); //Day
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); //Month
+    const yyyy = today.getFullYear(); // Year
+    const hh = today.getHours() < 10 ? "0" + today.getHours() : today.getHours() // Hours
+    const minutes = today.getMinutes() < 10 ? "0" + today.getMinutes() : today.getMinutes() // Minutes
+    return `${dd}/${mm}/${yyyy} ${hh}:${minutes}`
+  }
+  const handleOnSubmit = (e: any) => {
+    e.preventDefault()
+    // Get form data
+    const formValues = Object.fromEntries(Array.from(e.target).map((x: any) => ([x.id, x.value])))
+    // Remove null properties
+    const filtered = Object.fromEntries(Object.entries(formValues).filter(([key]) => key !== ''));
+
+
+    // Get products
+    const needeed = findShop?.menu
+    // Get product by id, get it data and filter odd items
+    const final = needeed?.map((product: { id: number }) => {
+      const searching = selectedProducts.find((item) => item.id === product.id)?.quantity
+      if (searching) {
+        return { ...product, quantity: searching }
+      }
+    }).filter((item) => item !== undefined)
+    // Spread product value + form value into another obj
+    const obj = { id: Date.now(), createdAt: currentData(), restaurant: findShop?.name, products: final, total: total, formData: filtered }
+    setOrders(orders => [...orders, obj])
+    clearState()
+    e.target.reset()
+  }
+
+
+  useEffect(() => {
+    console.log(currentData())
+    console.log(orders)
+  }, [orders])
+
+  const calculateTotal = () => {
+    const variable = selectedProducts.map((product) => {
+      const item = findShop?.menu.find((i) => i.id === product.id)
+      if (item) {
+        return item?.price * product.quantity
+      }
+      else return 0
+    })
+    // Sum this array if it has values
+    if (variable.length) {
+      const sum = variable.reduce((prev, curr) => {
+        return prev + curr
+      })
+      setTotal(sum)
+    } else setTotal(0)
+  }
+
 
   return (
     <DeliveryAppContext.Provider
@@ -117,7 +183,11 @@ export function DeliveryAppProvider({ children }: DeliveryAppProviderProps) {
         selectedProducts,
         cartQuantity,
         shop,
-        chooseShop
+        chooseShop,
+        calculateTotal,
+        handleOnSubmit,
+        total,
+        orders
       }}>
       {children}
     </DeliveryAppContext.Provider>

@@ -13,14 +13,12 @@
         "id": 2,
         "name": "Burger-M",
         "imgUrl": "https://media.istockphoto.com/photos/delicious-burger-isolated-on-yellow-picture-id1264358069",
-
         "price": 70
       },
       {
         "id": 3,
         "name": "Burger-L",
         "imgUrl": "https://media.istockphoto.com/photos/delicious-burger-isolated-on-yellow-picture-id1264358069",
-
         "price": 90
       },
       {

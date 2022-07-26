@@ -10,6 +10,7 @@ export const Navbar = () => {
     <nav className='navbar'>
       <Link className='navbar__item' to='/shop'>SHOP</Link>
       <Link className="navbar__item" to='/shopping-cart'>SHOPPING-CART {cartQuantity ? cartQuantity : ''}</Link>
+      <Link className='navbar__item' to='/orders'>ORDERS</Link>
     </nav>
   )
 }

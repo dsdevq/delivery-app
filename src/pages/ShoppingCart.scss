@@ -5,6 +5,7 @@
   gap: 1rem;
   &__form {
     border: 1px solid black;
+    border-radius: 1rem;
     flex: 1 1 40%;
     min-width: 200px;
   }
@@ -12,13 +13,15 @@
     flex: 1 1 40%;
     overflow: auto;
     min-width: 200px;
+    background-color: #cc6666;
+    border-radius: 1rem;
+
     border: 1px solid black;
   }
 }
 .list {
   &__title {
-    position: absolute;
-    top: 30px;
+    padding: 1rem 1rem 0 1rem;
   }
   &__menu {
     display: flex;
@@ -32,6 +35,9 @@
     gap: 1rem;
     position: relative;
     padding: .5rem;
+    border-radius: .5rem;
+    background-color: #d88f8f;
+
     border: 1px solid black;
     flex-wrap: wrap;
     justify-content: center;
@@ -39,6 +45,7 @@
     }
   &__image {
     width: 100%;
+    border-radius: .5rem;
     max-width: 200px;
   }
   &__details {
@@ -47,10 +54,6 @@
     flex-direction: column;
     flex: 1;
     font-size: 20px;
-  }
-  &__name {}
-  &__price {}
-  &__quantity {
   }
   &__buttons {
     display: flex;
@@ -69,8 +72,11 @@
 }
 .submit {
   display: flex;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #cc6666;
   flex-direction: column;
-  align-items: flex-end;
+  align-self: flex-end;
   gap: 10px;  
   &__total {
     font-size: 48px;

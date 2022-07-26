@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  padding-top: 1rem;
   &__shops {
     flex: 1 1 30%;
     border: 1px solid black;
@@ -12,6 +13,9 @@
   }
 }
 .shops-items {
+  &__title {
+    padding: 1rem;
+  }
   &__list {
     padding: 2rem .5rem;
     display: flex;
@@ -21,14 +25,12 @@
     text-align: center;
   }
   &__shop {
+    cursor: pointer;
     padding: 1rem .5rem ;
     border: 1px solid black;
     width: 100%;
     min-width: fit-content;
     max-width: 50%;
-    &:focus {
-      background-color: green;
-    }
   }
 }
 .error {
