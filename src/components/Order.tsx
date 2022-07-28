@@ -1,4 +1,6 @@
-type OrderProps = {
+import './Order.scss'
+
+interface OrderProps {
   products: any
   total: number,
   formData: any,

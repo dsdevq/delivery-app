@@ -22,25 +22,27 @@ export const ShoppingCartItem = ({ id, quantity }: ShoppingCartItemProps) => {
 
   useEffect(() => {
     // Get selected shop by id
-    const neededShop = data.find((shops) => shops.id === shop)
     // Get selected products by id 
     const neededProduct = neededShop?.menu.find((product) => product.id === id)
     // Set product, so it will appear
     setProduct(neededProduct)
   }, [])
+  const neededShop = data.find((shops) => shops.id === shop)
+  const neededProduct = neededShop?.menu.find((product) => product.id === id)
+
 
   return (
     <>
       {
-        product && (
+        neededProduct && (
           <li key={id} className="list__item">
-            <img className='list__image' src={product.imgUrl} alt='image' />
+            <img className='list__image' src={neededProduct.imgUrl} alt='image' />
             <div className="list__details">
-              <p className='list__name'>{product.name}</p>
-              <p className='list__price'>Price: {product.price}UAH </p>
+              <p className='list__name'>{neededProduct.name}</p>
+              <p className='list__price'>Price: {neededProduct.price}UAH </p>
               <p className='list__quantity'>Quantity: {quantity}</p>
-              {quantity > 1 &&
-                <p>Total: {quantity * product.price}</p>
+              {quantity &&
+                <p>Total: {quantity * neededProduct.price}</p>
               }
               <div className="list__buttons">
                 <button className='list__button' onClick={() => increaseCartQuantity(id)}>Increase</button>
