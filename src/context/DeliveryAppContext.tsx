@@ -125,30 +125,38 @@ export function DeliveryAppProvider({ children }: DeliveryAppProviderProps) {
     return `${dd}/${mm}/${yyyy} ${hh}:${minutes}`
   }
   const handleOnSubmit = (e: any) => {
-    e.preventDefault()
-    setOrders(
-      orders => {
-        // Get form data
-        const formValues = Object.fromEntries(Array.from(e.target).map((x: any) => ([x.id, x.value])))
-        // Remove null properties
-        const filtered = Object.fromEntries(Object.entries(formValues).filter(([key]) => key !== ''));
-        // Get products
-        const needeed = findShop?.menu
-        // Get product by id, get it data and filter odd items
-        const final = needeed?.map((product: { id: number }) => {
-          const searching = selectedProducts.find((item) => item.id === product.id)?.quantity
-          if (searching) {
-            return { ...product, quantity: searching }
+    return new Promise((resolve) => {
+      e.preventDefault()
+      resolve(
+        setOrders(
+          orders => {
+            // Get form data
+            const formValues = Object.fromEntries(Array.from(e.target).map((x: any) => ([x.id, x.value])))
+            // Remove null properties
+            const filtered = Object.fromEntries(Object.entries(formValues).filter(([key]) => key !== ''));
+            // Get products
+            const needeed = findShop?.menu
+            // Get product by id, get it data and filter odd items
+            const final = needeed?.map((product: { id: number }) => {
+              const searching = selectedProducts.find((item) => item.id === product.id)?.quantity
+              if (searching) {
+                return { ...product, quantity: searching }
+              }
+            }).filter((item) => item !== undefined)
+            // Spread product value + form value into another obj
+            console.log(formValues)
+            const obj = { id: Date.now(), createdAt: currentData(), restaurant: findShop?.name, products: final, total: total, formData: filtered }
+            return [...orders, obj]
           }
-        }).filter((item) => item !== undefined)
-        // Spread product value + form value into another obj
-        const obj = { id: Date.now(), createdAt: currentData(), restaurant: findShop?.name, products: final, total: total, formData: filtered }
-        return [...orders, obj]
-      }
-    )
-    clearState()
-    e.target.reset()
+        )
+      )
+    }).then(() => {
+      clearState()
+      e.target.reset()
+    })
   }
+
+
 
   const calculateTotal = () => {
     const variable = selectedProducts.map((product) => {
