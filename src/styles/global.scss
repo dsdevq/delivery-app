@@ -1,25 +1,24 @@
-[class*=__container] {
-  max-width: 1270px;
-  padding: 0 15px;
-  margin: 0px auto;
+[class*="__container"] {
+	max-width: 1270px;
+	padding: 0 15px;
+	margin: 0px auto;
 }
 
 * {
-  font-family: 'Courier New', Courier, monospace;
-  box-sizing: border-box;
+	font-family: "Courier New", Courier, monospace;
+	box-sizing: border-box;
 }
 
 .app__container {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
-button { 
-  padding: 5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  &:active{
-    transform: scale(0.9);
-  }
+button {
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	&:active {
+		transform: scale(0.9);
+	}
 }
-

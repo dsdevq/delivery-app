@@ -1,7 +1,4 @@
-import { useState } from 'react'
 import { useShoppingCart } from '../context/DeliveryAppContext'
-import data from '../data/items.json'
-import './Form.scss'
 
 
 export const Form = () => {
@@ -12,28 +9,28 @@ export const Form = () => {
 
   return (
     <>
-      <form onSubmit={handleOnSubmit} id='Form' className='form'>
-        <div className='form__item'>
-          <label className='label' htmlFor="name">Name:</label>
-          <input className='input'
+      <form onSubmit={handleOnSubmit} id='Form' className='flex flex-col gap-4'>
+        <div className='flex flex-col gap-2 max-w-lg px-4 pt-8'>
+          <label className='text-lg font-semibold' htmlFor="name">Name:</label>
+          <input className='text-center text-sm p-2 border-solid border-black border-2'
             required
             type="text" id='name' />
         </div>
-        <div className='form__item'>
-          <label className='label' htmlFor="email">Email:</label>
-          <input className='input'
+        <div className='flex flex-col gap-2 max-w-lg px-4'>
+          <label className='text-lg font-semibold' htmlFor="email">Email:</label>
+          <input className='text-center text-sm p-2 border-solid border-black border-2'
             required
             type="email" id='email' />
         </div>
-        <div className='form__item'>
-          <label className='label' htmlFor="tel">Phone:</label>
-          <input className='input'
+        <div className='flex flex-col gap-2 max-w-lg px-4'>
+          <label className='text-lg font-semibold' htmlFor="tel">Phone:</label>
+          <input className='text-center text-sm p-2 border-solid border-black border-2'
             required
             type="tel" id='tel' />
         </div>
-        <div className='form__item'>
-          <label className='label' htmlFor="address">Address:</label>
-          <input className='input'
+        <div className='flex flex-col gap-2 max-w-lg px-4 pb-8'>
+          <label className='text-lg font-semibold' htmlFor="address">Address:</label>
+          <input className='text-center text-sm p-2 border-solid border-black border-2'
             required
             type="text" id='address' />
         </div>

@@ -1,5 +1,4 @@
 import { useShoppingCart } from '../context/DeliveryAppContext'
-import './ShopItem.scss'
 
 type StoreItemProps = {
   id: number,
@@ -19,21 +18,21 @@ export const ShopItem = ({ id, name, price, imgUrl }: StoreItemProps) => {
   const quantity = getItemQuantity(id)
 
   return (
-    <li key={id} className="shop-menu__item">
-      <img className='shop-menu__image' src={imgUrl} alt="foodImage" />
-      <div className='shop-menu__information'>
-        <p className='shop-menu__name'>
+    <li key={id} className=" flex-1 basis-48 max-w-xs bg-orange-700 border-solid border-2 border-black p-4 rounded-lg">
+      <img className='max-w-full aspect-square' src={imgUrl} alt="foodImage" />
+      <div className='flex flex-wrap p-1 bg-orange-400 rounded-md flex-grow text-xl font-medium min-h-max whitespace-nowrap gap-2'>
+        <p className='self-start'>
           {name}
         </p>
-        <p className='shop-menu__price'>
+        <p className='underline font-semibold'>
           {price}UAH
         </p>
         {
           !quantity
             ?
-            <button className='shop-menu__button' onClick={() => increaseCartQuantity(id)}>+ add to Cart</button>
+            <button className='flex-grow items-end bg-slate-200 text-blue-900' onClick={() => increaseCartQuantity(id)}>+ add</button>
             :
-            <button className='shop-menu__button' onClick={() => removeFromCart(id)}>Remove</button>
+            <button className='flex-grow items-end bg-red-700 text-white font-semibold' onClick={() => removeFromCart(id)}>Remove</button>
         }
       </div>
     </li>

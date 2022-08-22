@@ -35,19 +35,19 @@ export const ShoppingCartItem = ({ id, quantity }: ShoppingCartItemProps) => {
     <>
       {
         neededProduct && (
-          <li key={id} className="list__item">
-            <img className='list__image' src={neededProduct.imgUrl} alt='image' />
-            <div className="list__details">
-              <p className='list__name'>{neededProduct.name}</p>
-              <p className='list__price'>Price: {neededProduct.price}UAH </p>
-              <p className='list__quantity'>Quantity: {quantity}</p>
+          <li key={id} className="flex flex-wrap gap-4 relative p-2 rounded-lg bg-red-300 border-2 border-solid border-black justify-center items-center">
+            <img className='rounded-lg w-52' src={neededProduct.imgUrl} alt='Product' />
+            <div className="flex gap-1 flex-col flex-grow text-xl">
+              <p className='font-semibold bg-green-300 self-start border-2 border-solid border-green-600 p-4'>{neededProduct.name}</p>
+              <p>Price: {neededProduct.price}UAH </p>
+              <p>Quantity: {quantity}</p>
               {quantity &&
-                <p>Total: {quantity * neededProduct.price}</p>
+                <p>Total: {quantity * neededProduct.price}UAH</p>
               }
-              <div className="list__buttons">
-                <button className='list__button' onClick={() => increaseCartQuantity(id)}>Increase</button>
-                <button className='list__button' onClick={() => decreaseCartQuantity(id)}>{quantity !== 1 ? 'Decrease' : 'Remove'}</button>
-                <button className='list__button close' onClick={() => removeFromCart(id)}> &times; </button>
+              <div className="flex gap-1">
+                <button className='text-2xl self-start bg-green-600 text-white' onClick={() => increaseCartQuantity(id)}>Increase</button>
+                <button className='text-2xl self-start bg-red-600 text-white' onClick={() => decreaseCartQuantity(id)}>{quantity !== 1 ? 'Decrease' : 'Remove'}</button>
+                <button className='text-2xl self-start absolute top-1 right-1' onClick={() => removeFromCart(id)}> &times; </button>
               </div>
             </div>
           </li>

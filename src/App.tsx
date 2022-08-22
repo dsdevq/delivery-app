@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+// import './index.css'
 import { Route, Routes } from 'react-router-dom';
 import './styles/reset.scss'
 import './styles/global.scss'
@@ -10,16 +10,14 @@ import { Orders } from './pages/Orders';
 function App() {
 
   return (
-    <div className="App">
-      <div className="app__container">
-        <Navbar />
-        <Routes>
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/shopping-cart' element={<ShoppingCart />} />
-          <Route path='/orders' element={<Orders />} />
-        </Routes>
-      </div>
-    </div >
+    <div className="container mx-auto px-4 pr-4">
+      <Navbar />
+      <Routes>
+        <Route path='/shop' element={<Shop />} />
+        <Route path='/shopping-cart' element={<ShoppingCart />} />
+        <Route path='/orders' element={<Orders />} />
+      </Routes>
+    </div>
   );
 }
 

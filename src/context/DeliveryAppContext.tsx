@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useContext, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 import data from '../data/items.json'
 type DeliveryAppProviderProps = {
@@ -27,6 +27,7 @@ type CartItem = {
   quantity: number
 }
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 const DeliveryAppContext = createContext({} as DeliveryAppContext)
 
 export function useShoppingCart() {

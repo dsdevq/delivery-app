@@ -1,5 +1,3 @@
-import './Order.scss'
-
 interface OrderProps {
   products: any
   total: number,
@@ -10,20 +8,20 @@ interface OrderProps {
 
 export const Order = ({ products, total, formData, createdAt, restaurant }: OrderProps) => {
   return (
-    <li className="order">
-      <article className="order__details">
-        <p className="order__address">
+    <li className="flex gap-1 flex-col p-3 bg-red-400 rounded-xl">
+      <article className="font-semibold text-xl">
+        <p>
           {formData.address}
         </p>
-        <p >
+        <p>
           {formData.tel}
         </p>
       </article>
-      <h5 className="order__title">{restaurant}</h5>
-      <ul className="order__products">
+      <h5 className="text-center text-xl">{restaurant}</h5>
+      <ul className="flex gap-2 flex-col flex-grow">
         {
           products.map((product: any) => (
-            <li className="order__product" key={product.id}>
+            <li className="p-1 bg-red-600 rounded-md" key={product.id}>
               <p>
                 {product.name}
               </p>
@@ -36,7 +34,7 @@ export const Order = ({ products, total, formData, createdAt, restaurant }: Orde
           ))
         }
       </ul>
-      <article className="order__summary">
+      <article>
         <p>
           Summary: {total}UAH
         </p>
